@@ -32,3 +32,6 @@
 ## 使用素材
 - フリーイラスト素材として以下を使用予定
 - ・いらすとや(https://www.irasutoya.com/)
+- 
+## 実装機能リストURL
+- https://docs.google.com/spreadsheets/d/10_XSfY0_TicpwC0BWSdh0R6_HcqguxylIdInvoTWK4k/edit#gid=454260661
