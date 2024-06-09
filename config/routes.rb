@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
-  devise_for :users
   get "/home/about" => "homes#about", as: "about"
   root to: "homes#top"
+  devise_for :users
+  devise_scope :user do
+  get '/users/sign_out' => 'devise/sessions#destroy'
+end
   resources :lists, only: [:index, :show]
   resources :posts, only: [:new, :create]
   resources :users, only: [:show, :edit, :update]

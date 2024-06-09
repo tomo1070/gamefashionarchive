@@ -6,4 +6,10 @@ class ListsController < ApplicationController
   def show
     @post = Post.find(params[:id])
   end
+  
+  private
+
+  def post_params
+    params.require(:post).permit(:title, :image, :comment)
+  end
 end
