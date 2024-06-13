@@ -9,9 +9,13 @@
 
   <body>
     <header>
+    <%= link_to image_tag("GFA.jpg"), lists_path %>
     <% if user_signed_in? %>
       <li>
         <%= link_to '投稿フォーム', new_post_path %>
+      </li>
+      <li>
+        <a href="#" id="search-link">検索</a>
       </li>
       <li>
         <%= link_to 'マイページ', user_path(current_user.id) %>
@@ -25,7 +29,11 @@
       </li>
     <% end %>
 
-  </header>
+    </header>
+    <div id="search-bar" style="display: none;">
+      <input type="text" id="search-input" placeholder="タグを入力">
+      <button id="search-button">検索</button>
+    </div>
     <%= yield %>
   </body>
 </html>

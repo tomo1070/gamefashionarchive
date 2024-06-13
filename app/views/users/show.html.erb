@@ -1,9 +1,13 @@
+<% @posts.each do |post| %>
 <div class="profile-container">
   <h3 class="profile-name"><%= @user.name %></h3>
-  <%= image_tag @user.get_profile_image(100,100) %>
   <% if @user.id == current_user.id %>
-  <p><%= link_to "プロフィール編集", edit_user_path(@user) %></p>
+  <%= link_to list_path(post.id) do %>
+    <%= image_tag post.get_image %>
   <% end %>
 </div>
+<% end %>
+<% end %>
 
+<%= link_to "プロフィール編集", edit_user_path(@user) %>
 <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>

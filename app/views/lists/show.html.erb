@@ -1,8 +1,25 @@
 <div>
   <%= image_tag @post.get_image %>
-  <p>タイトル：<%= @post.title %></p>
-  <p>コメント：<%= @post.comment %></p>
-  <p>投稿ユーザー画像：<%= image_tag 'no_image.jpg' %></p>
+  <h3>タイトル：<%= @post.title %></h3>
   <p>名前：<%= @post.user.name %></p>
+  <p>コメント：<%= @post.comment %></p>
   <p>投稿日：<%= @post.created_at.strftime('%Y/%m/%d') %></p>
+  <p><%= link_to "#{@post.comments.count} コメント", post_path(@post.id) %></p>
 </div>
+
+<div>
+  <p>コメント件数：<%= @post.comments.count %></p>
+  <% @post.comments.each do |comment| %>
+    <p><%= image_tag comment.user.get_profile_image(100,100) %></p>
+    <%= comment.user.name %> <%= comment.created_at.strftime('%Y/%m/%d') %>
+    <%= comment.comment %>
+  <% end %>
+</div>
+<div>
+  <%= form_with url: post_comments_path(@post), method: :post do |f| %>
+    <%= f.text_area :comment, placeholder: "コメントを入力してください" %>
+    <%= f.submit "コメントを投稿する" %>
+  <% end %>
+</div>
+
+<%= link_to "投稿の編集", edit_post_path(@post.id) %>

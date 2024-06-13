@@ -14,4 +14,5 @@ class User < ApplicationRecord
     profile_image.variant(resize_to_limit: [width, height]).processed
   end
   has_many :posts, dependent: :destroy
+  has_many :comments, dependent: :destroy
 end
