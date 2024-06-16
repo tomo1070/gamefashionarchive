@@ -1,7 +1,7 @@
 <div>
   <%= image_tag @post.get_image %>
   <h3>タイトル：<%= @post.title %></h3>
-  <p>名前：<%= @post.user.name %></p>
+  <p>名前：<%= link_to @post.user.name, user_path(@post.user) %></p>
   <p>コメント：<%= @post.comment %></p>
   <p>タグ：
   <% @selected_tags.each do |tag| %>
@@ -28,4 +28,6 @@
   <% end %>
 </div>
 
-<%= link_to "投稿の編集", edit_post_path(@post.id) %>
+<% if @post.user == current_user %>
+  <%= link_to "投稿の編集", edit_post_path(@post.id) %>
+<% end %>
