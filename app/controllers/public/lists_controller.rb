@@ -1,4 +1,4 @@
-class ListsController < ApplicationController
+class Public::ListsController < ApplicationController
   def index
     @posts = Post.all
   end

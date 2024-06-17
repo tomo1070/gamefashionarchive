@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class Public::UsersController < ApplicationController
   before_action :authenticate_user!, only: [:index, :edit, :update, :show, :create]
   before_action :is_matching_login_user, only: [:edit, :update]
   
