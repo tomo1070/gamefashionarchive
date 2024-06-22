@@ -1,11 +1,12 @@
-<% @posts.each do |post| %>
-  <div class="profile-container">
-    <h3 class="profile-name"><%= @user.name %></h3>
-    <%= link_to list_path(post.id) do %>
-      <%= image_tag post.get_image %>
-    <% end %>
-  </div>
-<% end %>
+<div class="row">
+  <% @posts.each do |post| %>
+    <div class="col-md-4">
+      <%= link_to list_path(post.id) do %>
+        <%= image_tag post.get_image %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
 
 <% if @user == @current_user %>
   <%= link_to "プロフィール編集", edit_user_path(@user) %>

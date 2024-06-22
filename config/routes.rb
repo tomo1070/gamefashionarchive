@@ -12,15 +12,17 @@ Rails.application.routes.draw do
   root to: "homes#top"
 
   scope module: :public do
-  devise_for :users
-  devise_scope :user do
-  get '/users/sign_out' => 'devise/sessions#destroy'
-end
-  resources :lists, only: [:index, :show]
-  resources :posts, only: [:new, :create, :edit, :update, :show, :destroy] do
-    resources :comments, only: [:create, :destroy]
+    devise_for :users, controllers: {
+      sessions: 'public/sessions'
+    }
+    devise_scope :user do
+      get '/users/sign_out' => 'devise/sessions#destroy'
+    end
+    resources :lists, only: [:index, :show]
+    resources :posts, only: [:new, :create, :edit, :update, :show, :destroy] do
+      resources :comments, only: [:create, :destroy]
+    end
+    resources :users, only: [:show, :edit, :update]
+    # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   end
-  resources :users, only: [:show, :edit, :update]
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-end
 end

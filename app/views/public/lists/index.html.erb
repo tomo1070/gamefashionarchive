@@ -1,7 +1,10 @@
-<% @posts.each do |post| %>
-  <div>
-    <%= link_to list_path(post.id) do %>
-      <%= image_tag post.get_image %>
-    <% end %>
-  </div>
-<% end %>
+<div class="row">
+  <% @posts.each do |post| %>
+    <div class="col-md-4">
+      <%= link_to list_path(post.id) do %>
+        <%= image_tag post.get_image %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+<%= paginate @posts %>
