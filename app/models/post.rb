@@ -3,6 +3,7 @@ class Post < ApplicationRecord
   has_and_belongs_to_many :tags
   belongs_to :user
   has_many :comments, dependent: :destroy
+  has_many :favorites, dependent: :destroy
   
   attribute :title, :string
   
@@ -16,5 +17,8 @@ class Post < ApplicationRecord
       image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
     end
     image
+  end
+  def favorited_by?(user)
+    favorites.exists?(user_id: user.id)
   end
 end

@@ -17,26 +17,29 @@
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
           <a class="navbar-brand p-3" href="/">
-            <%= link_to image_tag("GFA.jpg"), lists_path %>
+            <% if user_signed_in? %>
+              <%= link_to image_tag("GFA.jpg"), lists_path %>
+            <% else %>
+              <%= link_to image_tag("GFA.jpg"), root_path %>
+            <% end %>
           </a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                     aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
-                          <div class="input-group">
-              <input type="text" class="form-control" placeholder="テキスト入力欄">
-                <span class="input-group-btn">
-                  <button type="button" class="btn btn-default">検索</button>
-                </span>
-              <span class="tag-area"></span>
-            </div>
+            <% if user_signed_in? %>
+            <li class="nav-item">
+              <%= form_with url: lists_path, method: :get, class: 'form-inline' do |form| %>
+                <%= form.select :tag, options_for_select(Tag.all.map { |tag| [tag.name, tag.id] }), prompt: 'タグを選択' %>
+                <%= form.submit "検索", class: 'btn btn-light' %>
+              <% end %>
+            </li>
             <li class="nav-item">
               <%= link_to new_post_path, class: 'nav-link text-dark' do %>投稿
               <% end %>
             </li>
-            <% if user_signed_in? %>
             <li class="nav-item">
               <%= link_to user_path(current_user.id), class: 'nav-link text-dark' do %>マイページ
               <% end %>

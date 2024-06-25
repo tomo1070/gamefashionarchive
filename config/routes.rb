@@ -21,6 +21,7 @@ Rails.application.routes.draw do
     resources :lists, only: [:index, :show]
     resources :posts, only: [:new, :create, :edit, :update, :show, :destroy] do
       resources :comments, only: [:create, :destroy]
+      resource :favorite, only: [:create, :destroy]
     end
     resources :users, only: [:show, :edit, :update]
     # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
