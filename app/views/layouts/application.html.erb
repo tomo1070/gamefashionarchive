@@ -32,7 +32,7 @@
             <% if user_signed_in? %>
             <li class="nav-item">
               <%= form_with url: lists_path, method: :get, class: 'form-inline' do |form| %>
-                <%= form.select :tag, options_for_select(Tag.all.map { |tag| [tag.name, tag.id] }), prompt: 'タグを選択' %>
+                <%= form.select :tag, Post.tags.keys, prompt: 'タグを選択' %>
                 <%= form.submit "検索", class: 'btn btn-light' %>
               <% end %>
             </li>

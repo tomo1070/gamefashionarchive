@@ -5,8 +5,8 @@
   <%= f.text_field :title %>
   <h4>コメント</h4>
   <%= f.text_area :comment %>
-  <h4>ジョブ</h4>
-  <%= f.select :tag, {'タンク': 'タンク', '近接DPS': '近接DPS', '遠隔DPS': '遠隔DPS', 'ヒーラー': 'ヒーラー'} %>
+  <h4>ロール</h4>
+    <%= f.select :tag, Post.tags.keys %>
   <%= f.submit '更新' %>
   <%= link_to "この投稿の削除", post_path(@post.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
 <% end %>

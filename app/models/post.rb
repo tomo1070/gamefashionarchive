@@ -1,12 +1,12 @@
 class Post < ApplicationRecord
   has_one_attached :image
-  has_and_belongs_to_many :tags
   belongs_to :user
   has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
-  
+  enum tag: { tank: 0, melee_dps: 1, long_dps: 2, healer:3 }
+
   attribute :title, :string
-  
+
   validates :title, presence: true
   validates :comment, presence: true
   validates :image, presence: true

@@ -1,14 +1,18 @@
 class Public::ListsController < ApplicationController
+
   def index
-    @posts = Post.page(params[:page])
+    if params[:tag]
+      @posts = Post.where(tag: params[:tag]).page(params[:page])
+    else
+      @posts = Post.page(params[:page])
+    end
   end
 
   def show
     @post = Post.find(params[:id])
     @comment = Comment.new
-    @selected_tags = Tag.where(id: @post.tag_ids)
   end
-  
+
   private
 
   def post_params
