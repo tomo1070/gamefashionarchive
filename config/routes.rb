@@ -11,6 +11,10 @@ Rails.application.routes.draw do
   get "/home/about" => "homes#about", as: "about"
   root to: "homes#top"
 
+  devise_scope :user do
+    post "users/guest_sign_in", to: "users/sessions#guest_sign_in"
+  end
+
   scope module: :public do
     devise_for :users, controllers: {
       sessions: 'public/sessions'
