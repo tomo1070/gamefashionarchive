@@ -3,6 +3,7 @@ class Post < ApplicationRecord
   belongs_to :user
   has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  has_many :group_posts, dependent: :destroy
   enum tag: { tank: 0, melee_dps: 1, long_dps: 2, healer:3 }
 
   attribute :title, :string

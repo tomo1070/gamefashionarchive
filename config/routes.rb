@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   namespace :admin do
     get 'dashboards', to: 'dashboards#index'
     resources :users, only: [:destroy]
+    resources :comments, only: [:destroy]
   end
 
   get "/home/about" => "homes#about", as: "about"
@@ -29,5 +30,6 @@ Rails.application.routes.draw do
     end
     resources :users, only: [:show, :edit, :update]
     # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+    resources :groups, only: [:new, :index, :show, :create, :edit, :update]
   end
 end

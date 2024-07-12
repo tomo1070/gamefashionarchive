@@ -1,0 +1,11 @@
+<div class='container px-5 px-sm-0'>
+  <%= flash[:notice] %>
+  <div class='row'>
+    <div class='col-md-8 offset-md-1'>
+      <h2>Groups</h2>
+      <% @groups.each do |group| %>
+        <p><%=link_to group.name, group_path(group.id) %></p>
+      <% end %>
+    </div>
+  </div>
+</div>
