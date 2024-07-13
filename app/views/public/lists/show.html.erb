@@ -1,5 +1,6 @@
+<div class="d-flex flex-column align-items-center">
 <div>
-  <%= image_tag @post.get_image %>
+  <%= image_tag @post.get_image,size: "400x400"  %>
   <h3>タイトル：<%= @post.title %></h3>
   <p>名前：<%= link_to @post.user.name, user_path(@post.user) %></p>
   <p>コメント：<%= @post.comment %></p>
@@ -40,3 +41,4 @@
 <% if @post.user == current_user %>
   <%= link_to "投稿の編集", edit_post_path(@post.id) %>
 <% end %>
+</div>
