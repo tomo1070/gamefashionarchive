@@ -10,7 +10,7 @@ class Public::GroupsController < ApplicationController
 
   def show
     @group = Group.find(params[:id])
-    @post = Post.find(params[:post_id])
+    @posts = @group.posts
     @new_post = Post.new
   end
 
@@ -19,17 +19,19 @@ class Public::GroupsController < ApplicationController
     @posts = Post.all
   end
 
+  
   def create
+    group_params
     @group = Group.new(group_params)
     @group.owner_id = current_user.id
-    @group.post_ids = params[:group][:post_ids]
+    @posts = Post.all
     if @group.save
       redirect_to groups_path
     else
       render 'new'
     end
   end
-  
+
   def edit
   end
 
@@ -44,9 +46,7 @@ class Public::GroupsController < ApplicationController
   private
 
   def group_params
-    params.require(:group).permit(:name, :introduction, :group_image)
-    params[:group][:post_ids] = params[:group][:post_ids].select { |id| id.to_i != 0 }
-    params.require(:group).permit(post_ids: [])
+    params.require(:group).permit(:name, :introduction, post_ids: [])
   end
 
   def ensure_correct_user
