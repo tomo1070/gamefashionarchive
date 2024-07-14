@@ -3,7 +3,7 @@ class Post < ApplicationRecord
   belongs_to :user
   has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
-  has_many :group_posts, dependent: :destroy
+  has_many :posts, through: :group_posts
   enum tag: { tank: 0, melee_dps: 1, long_dps: 2, healer:3 }
 
   attribute :title, :string
@@ -11,6 +11,16 @@ class Post < ApplicationRecord
   validates :title, presence: true
   validates :comment, presence: true
   validates :image, presence: true
+  
+  def self.guest
+    find_or_create_by!(email: GUEST_USER_EMAIL) do |user|
+      user.password = SecureRandom.urlsafe_base64
+      user.name = "guestuser"
+    end
+  end
+  def guest_user?
+    email == GUEST_USER_EMAIL
+  end
 
   def get_image
     unless image.attached?

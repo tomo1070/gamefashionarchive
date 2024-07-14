@@ -2,10 +2,19 @@
   <h1 class="text-center">編集</h1>
     <%= form_with model: @post do |f| %>
     <h4>画像</h4>
-    <%= f.file_field :image, accept: "image/*" %>
-    <% if @post.image.attached? %>
-      <%= image_tag url_for(@post.image) %>
-    <% end %>
+    <%= f.file_field :image, accept: "image/*", onchange: "previewImage(this);" %>
+    <div id="image-preview"></div>
+
+    <script>
+      function previewImage(input) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+          var previewElement = document.getElementById('image-preview');
+          previewElement.innerHTML = `<img src="${e.target.result}" width="400" height="400">`;
+        };
+        reader.readAsDataURL(input.files[0]);
+      }
+    </script>
     <h4>タイトル</h4>
     <%= f.text_field :title %>
     <h4>コメント</h4>
