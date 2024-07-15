@@ -1,13 +1,20 @@
 <div class='container px-5 px-sm-0'>
-  <% @posts.each do |post| %>
+  <h2>グループ名：<%= @group.name %></h2>
+  <h3>グループ説明：<%= @group.introduction %></h3>
+
   <div class='row'>
-    <div class='col-md-8 offset-md-1'>
-      <h2><%= @group.name %></h2>
-      <p><%= @group.introduction %></p>
-      <% @post.each do |post| %>
-        <%= image_tag image %>
+  <% @posts.each do |post| %>
+    <div class='col-md-4'>
+      <% image_size = "300x300" %>
+      <%= link_to list_path(post.id) do %>
+        <%= image_tag post.image, size: image_size %>
       <% end %>
     </div>
-  </div>
   <% end %>
+  </div>
+
+  <div>
+    <%= link_to "グループの編集", edit_group_path(@group.id) %>
+    <%= link_to "一覧に戻る", groups_path %>
+  </div>
 </div>

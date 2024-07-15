@@ -1,4 +1,4 @@
-<%= form_with model: group, local: true do |f| %>
+<%= form_with model: @group, local: true do |f| %>
   <div class="form-group">
     <%= f.label :グループ名 %>
     <%= f.text_field :name, class: 'form-control' %>
@@ -8,8 +8,22 @@
     <%= f.label :紹介文 %>
     <%= f.text_area :introduction, class: 'form-control' %>
   </div>
-
+  
   <div class="form-group">
-    <%= f.submit class: 'btn btn-info' %>
+    <%= f.label :画像 %>
+    <div class="row">
+      <%= f.collection_check_boxes(:post_ids, Post.all, :id, :id) do |b| %>
+        <div class="col-md-4">
+          <div class="image-checkbox">
+            <%= b.label { b.check_box } %>
+            <%= image_tag b.object.image, size: "200x200" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <%= f.submit '更新', class: 'btn btn-info' %>
+    <%= link_to "この投稿の削除", group_path(@group.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
   </div>
 <% end %>
