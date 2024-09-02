@@ -7,6 +7,7 @@ class Public::UsersController < ApplicationController
     @user = User.find(params[:id])
     @current_user = current_user
     @posts = @user.posts.page(params[:page])
+    @favorite_posts = @user.favorites.map(&:post)
   end
 
   def edit

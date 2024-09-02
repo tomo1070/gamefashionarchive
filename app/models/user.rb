@@ -18,6 +18,8 @@ class User < ApplicationRecord
   def guest_user?
     email == GUEST_USER_EMAIL
   end
+  
+  
 
   def get_profile_image(width, height)
     unless profile_image.attached?
